@@ -3,8 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-df = pd.read_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\unlabelled_data.csv") 
-# print(df)
+df = pd.read_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\unlabelled_data.csv", header= None) 
+# print(df.head())
 
 
 k = 0.78
@@ -32,35 +32,38 @@ def check_position(point):                              # Function for checking 
             return "Right and Above"
     
 for index, row in df.iterrows():                       # Looping each row in DataFrame.
-    point = (row['x'], row['y']) 
+    point = (row["x"], row["y"]) 
     position = check_position(point)
-    print(f"Point {point} is: {position}")
+    # print(f"Point {point} is: {position}")
 
 
 
 
 
-# def classify_points():
-
-
-
-# def write_to_csv(row):
-    
-#     y_line = k * row['x'] + m
+def classify_points(row):                              # Function for classifying x and y as 0 or 1 depending on position.
+    y_line = k * row["x"] + m
   
-#     return 0 if row['y'] < y_line else 1
+    return 0 if row["y"] < y_line else 1
+
+df["Position"] = df.apply(classify_points, axis=1)     # Creates column: Position and applies it to each row in DF.
 
 
-# df['position'] = df.apply(write_to_csv, axis=1)
-
-
-# df.to_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\unlabelled_data.csv", index=False)
+df.to_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\labelled_data.csv", index=False)      # Writes and creates file labelled_data.csv
 # print(df)
+
+
+
+def scatter():
+    data_x = np.linspace(df['x'].min(), df['x'].max(), 100)
+    data_y = 0.78 * data_x + -0.01
     
-
-
+    for index, row in df.iterrows():
+        plt.scatter(row["x"], row["y"], color = "red" if row["Position"] == 1 else "blue")
     
+    plt.plot(data_x, data_y, color= "green", label= "y = 0.78x - 0.01")
+    plt.title("Classified Points")
+    plt.grid()
+    plt.legend()
+    plt.show()
 
-
-
-
+scatter()
