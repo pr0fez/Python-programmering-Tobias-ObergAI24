@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-df = pd.read_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\unlabelled_data.csv", header= None) 
+df = pd.read_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\Labs\Labs\unlabelled_data.csv", header= None) 
 # print(df.head())
 
 
@@ -48,19 +48,19 @@ def classify_points(row):                              # Function for classifyin
 df["Position"] = df.apply(classify_points, axis=1)     # Creates column: Position and applies it to each row in DF.
 
 
-df.to_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\labelled_data.csv", index=False)      # Writes and creates file labelled_data.csv
+df.to_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\Labs\Labs\labelled_data.csv", index=False)      # Writes and creates file labelled_data.csv
 # print(df)
 
 
 
-def scatter():
-    data_x = np.linspace(df['x'].min(), df['x'].max(), 100)
+def scatter():                                                      
+    data_x = np.linspace(df["x"].min(), df["y"].max(), 100)   # Min and max value between x and y. Makes it possible to plot the line.     
     data_y = 0.78 * data_x + -0.01
     
     for index, row in df.iterrows():
-        plt.scatter(row["x"], row["y"], color = "red" if row["Position"] == 1 else "blue")
+        plt.scatter(row["x"], row["y"], color = "red" if row["Position"] == 1 else "blue") # For-loop for every labelled csv point.
     
-    plt.plot(data_x, data_y, color= "green", label= "y = 0.78x - 0.01")
+    plt.plot(data_x, data_y, color= "black", label= "y = 0.78x - 0.01")                   # Plots the line with "y = 0.78x - 0.01"
     plt.title("Classified Points")
     plt.grid()
     plt.legend()
