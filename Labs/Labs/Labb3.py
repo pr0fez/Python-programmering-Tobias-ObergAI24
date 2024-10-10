@@ -62,8 +62,9 @@ def scatter():
     
     plt.plot(data_x, data_y, color= "black", label= "y = 0.78x - 0.01")                   # Plots the line with "y = 0.78x - 0.01"
     plt.title("Classified Points")
+    plt.text(df["x"].min(), df["y"].max(), "Red = Position 1\nBlue = Position 0", 
+             fontsize=9, color="black", verticalalignment= "top")
     plt.grid()
-    plt.legend()
     plt.show()
 
 scatter()
