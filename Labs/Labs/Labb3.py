@@ -13,9 +13,6 @@ m = -0.01
 
 df.columns = ["x", "y"]                                 # Adds columns x,y in DataFrame.
 
-
-
-
 def check_position(point):                              # Function for checking position of point.
     x, y = point
     y_line = 0.78 * x + -0.01                           # k, m - values.
