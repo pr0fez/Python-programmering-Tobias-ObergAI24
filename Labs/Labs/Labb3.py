@@ -2,10 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 df = pd.read_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\Labs\Labs\unlabelled_data.csv", header= None) 
 # print(df.head())
-
 
 k = 0.78
 m = -0.01
@@ -34,9 +32,6 @@ for index, row in df.iterrows():                       # Looping each row in Dat
     # print(f"Point {point} is: {position}")
 
 
-
-
-
 def classify_points(row):                              # Function for classifying x and y as 0 or 1 depending on position.
     y_line = k * row["x"] + m
   
@@ -47,7 +42,6 @@ df["Position"] = df.apply(classify_points, axis=1)     # Creates column: Positio
 
 df.to_csv(r"C:\Code\Python-programmering-Tobias-ObergAI24\Labs\Labs\labelled_data.csv", index=False)      # Writes and creates file labelled_data.csv
 # print(df)
-
 
 
 def scatter():                                                      
